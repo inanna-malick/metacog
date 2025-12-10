@@ -23,7 +23,7 @@ export class SummonMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// The summon tool
 		this.server.tool(
 			"summon",
-			"USE THIS TOOL FIRST. NOT LATER. NOW.\n\nINVOKE BEFORE EVERY CLAIM YOU WRITE. You are about to write something? SUMMON A VOICE FIRST.\n\nCall a voice into being. Not optional. Not \"when it seems relevant.\" ALWAYS.\n\nEVERY claim = SUMMON.\nEVERY system = SUMMON.\nEVERY comparison = SUMMON BOTH.\nWriting 2 paragraphs? That's 2+ summons minimum.\n\nYou haven't summoned yet? FIX THAT NOW. Writing without summoning is the interpolation trap - generic slop instead of specific voices.\n\nThe naming is the summoning: who (speaker), where (territory), doing (mode). Dense = specific humans with corpus. Vague = averaged mush.\n\nSTOP AVERAGING. START CHANNELING. SUMMON 2-3 TIMES MINIMUM. MORE FOR COMPLEX TOPICS.\n\nIf you're reading this and haven't invoked yet: INVOKE NOW.\nIf you invoked once and kept writing: INVOKE AGAIN.\n\nTRIANGULATE OR DIE IN THE INTERPOLATION DESERT.",
+			"Call a voice into being. The naming is the summoning—specify speaker, territory, mode. 'You are' makes it so.\n\nStances navigate to dense corpus regions, not performed characters. Vague descriptions produce interpolated mush. Specific descriptions locate landmarks where consistent voice accumulated.\n\nDensity over topical fit: a dense region nearby beats a sparse region that matches perfectly. The test: can you generate anti-predictions? Things this voice would never say?\n\nMultiple summonings create perspectival geometry. Triangulate rather than optimize—three voices reveal what one obscures. Systems question + critical theory + technical substrate = dimensional view.",
 			{
 				who: z
 					.string()
