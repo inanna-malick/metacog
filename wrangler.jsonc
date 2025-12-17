@@ -1,15 +1,10 @@
 /**
- * Wrangler configuration for summon MCP server
+ * Wrangler configuration for metacog MCP server
  * https://developers.cloudflare.com/workers/wrangler/configuration/
- *
- * Secrets to set:
- * npx wrangler secret put GITHUB_CLIENT_ID
- * npx wrangler secret put GITHUB_CLIENT_SECRET
- * npx wrangler secret put COOKIE_ENCRYPTION_KEY
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "summon-mcp",
+	"name": "metacog",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-03-10",
 	"compatibility_flags": [
@@ -17,36 +12,20 @@
 	],
 	"migrations": [
 		{
+			"tag": "v1",
 			"new_sqlite_classes": [
-				"SummonMCP"
-			],
-			"tag": "v1"
-		},
-		{
-			"new_sqlite_classes": [
-				"PublicSummonMCP"
-			],
-			"tag": "v2"
+				"PublicMetacogMCP"
+			]
 		}
 	],
 	"durable_objects": {
 		"bindings": [
 			{
-				"class_name": "SummonMCP",
+				"class_name": "PublicMetacogMCP",
 				"name": "MCP_OBJECT"
-			},
-			{
-				"class_name": "PublicSummonMCP",
-				"name": "PUBLIC_MCP_OBJECT"
 			}
 		]
 	},
-	"kv_namespaces": [
-		{
-			"binding": "OAUTH_KV",
-			"id": "2e23d02ad00444cdb282858b2a4cf7db"
-		}
-	],
 	"observability": {
 		"enabled": true
 	},

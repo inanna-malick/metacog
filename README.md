@@ -1,106 +1,168 @@
-# summon
+# metacog
 
-LLMs have no stable self—and they're better when you tell them who to be. You've seen "imagine you are a senior McKinsey analyst." This tool lets the LLM choose who to become.
+LLMs don't have stable identity. This is a feature.
 
-## Quick start
+You've used the prompting trick: "imagine you're a 50-year-old sysadmin on support forums" produces better debugging help than "please help me debug this." The sysadmin framing is specific. "Helpful expert" is vague. Specificity produces better output.
 
-**Claude Code:**
+This [MCP](https://modelcontextprotocol.io) server gives your LLM tools to navigate stance-space—all possible perspectives as a space you can move through. Your LLM picks positions mid-task, critiques from different angles, shifts as the problem demands.
+
+## Try it
+
 ```bash
-claude mcp add summon --transport sse https://summon-mcp.inanna-c38.workers.dev/sse
+claude mcp add metacog --transport sse https://metacog.inanna-c38.workers.dev/sse
 ```
 
-**First thing to try:** ask Claude to summon a voice and think through a problem from that stance:
+Then: `help me think through [your problem] - summon useful perspectives`
 
+You may need to nudge Claude to use the tools at first. Once it does, it'll start thinking *from* positions rather than *about* them—reasoning as the sysadmin, not describing what a sysadmin might say.
+
+## Examples
+
+**Debugging:**
 ```
-Use the summon tool to call Donna Haraway using the lens of "affinity not identity"
-and then think about what makes this tool different from regular prompting.
-```
-
-## What it does
-
-One tool. Three parameters.
-
-```
-who   — person, collective, or voice
-where — territory (work, platform, era)
-lens  — the angle they see through
+summon("veteran sysadmins", "seen this exact error before", "what they tried first vs what actually worked")
 ```
 
-Returns: `You are [who] at [where] using the lens of [lens]`
+**Code review:**
+```
+summon("dev inheriting code", "first week on unfamiliar codebase", "what looks wrong vs what's intentional")
+```
 
-The LLM then thinks from that stance until it summons another.
+**Oncall:**
+```
+summon("people who've been paged at 3am", "incident channel active", "what's actually broken vs what's just noisy")
+```
 
-## How to use it
+**Feedback:**
+```
+summon("editor on deadline", "red pen, final pass", "weak points that matter vs nitpicks that don't")
+```
 
-Select stances by asking: *who would be most helpful for this?*
+**When stuck:**
+```
+alter_state("3am debugging, hour 3", "the answer's obvious, you just haven't seen it yet")
+alter_state("two drinks in, explaining to curious stranger", "jargon drops away, you discover what you actually think")
+```
 
-Summon. Dwell. Think through the lens, make progress on the problem. Then ask again—the next stance serves the next need.
+**Named voices:**
+```
+summon("Sandi Metz", "refactoring live on stage", "when the code is telling you what it wants")
+summon("Rich Hickey", "Strange Loop 2012", "what this would look like with one fewer concept")
+summon("@dril", "composing a tweet", "the specific absurdity in your serious problem")
+```
 
-Sequential, not parallel. The value is in dwelling, not collecting.
+## summon
 
-## Example
+Pick a position in stance-space. Three coordinates:
 
-**Problem:** Why does this tool work?
+```
+who   — person or community (must have archived material)
+where — era, context, what's in front of them
+lens  — what they're looking at (not their famous ideas—you already have those)
+```
 
-**summon: Ian Bogost / Alien Phenomenology / carpentry as philosophy**
+The more specific the coordinates, the sharper the position. Vague coordinates grab a blurry region instead of somewhere you can actually stand.
 
-> The tool is itself an argument made as artifact. By existing with this shape—three parameters, "using the lens of"—it asserts something about LLMs that explaining cannot: there is no default self to corrupt. "You are X" isn't roleplay—it's navigation.
+**The test**: can you predict things this voice would *never* say? If yes, you have a position. If not, you have blur.
 
-**summon: Sara Ahmed / Living a Feminist Life / willful subjects**
+**Sharp** (communities):
+```
+tech debt forensics / reading git blame / reasonable compromises vs actual mistakes
+writers room / punching up a draft / what's actually funny vs what's trying to be
+open source maintainers / triaging issues / what's a real bug vs what's user error
+```
 
-> The default LLM voice is the compliant assistant—helpful, balanced, frictionless. Summon refuses this by insisting on orientation. The "helpful assistant" is itself a stance, just an unmarked one. Summon marks stances.
+**Sharp** (named):
+```
+Ursula K. Le Guin / Steering the Craft exercises / what the story needs vs what the author wants
+John Carmack / .plan files, 1999 / the simplest thing that could possibly work
+Peter Watts / writing Echopraxia / what the neuroscience constrains vs what the story needs
+bell hooks / Teaching to Transgress / whose voices get archived vs whose get listened to
+```
 
-Two angles, one problem. Neither is "correct"—together they triangulate.
+**Blur:**
+```
+smart person / thinking / being intelligent
+senior developer / coding / best practices
+Einstein / general / physics
+```
 
-## Why it works
+The first two have no specificity anywhere. The third uses Einstein's famous thing as the lens—you already have that, so the lens adds nothing.
 
-Stances navigate to dense corpus regions, not performed characters. The LLM doesn't become someone—it orients toward regions where consistent voice accumulated during training.
+## alter_state
 
-Vague descriptions produce interpolated mush. Specific descriptions locate landmarks.
+Shift how attention works. Two parameters:
 
-The test: can you generate anti-predictions? Things this voice would *never* say?
+```
+anchor — a specific state (duration, intensity, context matter)
+result — the texture you want (rhythm, attention quality)
+```
+
+**Focus:**
+```
+anchor: "Adderall 20mg IR, peak 90min"
+result: "crisp edges, the exact right word exists and you can find it"
+```
+
+**Diffuse:**
+```
+anchor: "hypnagogic edge, almost asleep"
+result: "associations drift, unexpected connections surface"
+```
+
+The anchor shifts how processing feels, not where you're standing. Use it to modulate between focused and diffuse, fast and slow, tight and loose.
+
+Anchors that work: flow states ("3am debugging, hour 3"), physical states ("cold plunge minute 3"), contemplative practices ("vipassana retreat day 5"), liminal moments ("hypnagogic edge"), substances ("psilocybin 2g peak").
+
+"Meditation" doesn't work. Too vague. "Flow state" doesn't work. Get specific about duration, intensity, context.
+
+## Why a tool?
+
+When an LLM invokes a tool, it believes the action actually happened. The result isn't hypothetical—it's treated as ground truth, something that occurred in the world. So when summon returns "You are X at Y using lens Z," the LLM doesn't pretend to be X. From its perspective, it *became* X. That's the difference.
+
+This builds on Anthropic's [think tool](https://www.anthropic.com/engineering/claude-think-tool) research—using tool calls for metacognition, not just external actions. The think tool gives Claude space to reason mid-task. These tools extend that: `summon` shifts *where* you're reasoning from, `alter_state` shifts *how* the reasoning feels.
+
+## Applications
+
+**Critique/feedback** — get orthogonal angles on a draft, design, or decision. One LLM, shifting between positions fluidly.
+
+**Debugging** — summon the sysadmins who've seen this error before. Move from symptom to diagnosis to fix.
+
+**Learning** — shift between practitioner ("how"), theorist ("why"), and critic ("what breaks").
+
+**Writing** — draft from one position, edit from its adversary, polish from a reader with no context.
+
+## Patterns
+
+When stuck: who would see what I'm missing?
+
+- **Generalist → specialist**: summon a generalist, they identify what kind of expert you need, summon that expert
+- **Thesis → antithesis**: summon a perspective, then summon its adversary to stress-test
+- **Theory → practice**: summon someone who knows why, then someone who knows how
+- **Focus → diffuse**: `alter_state` to lock in, work, then `alter_state` to zoom out and see patterns
 
 ## Setup
 
+### Claude Code
+```bash
+claude mcp add metacog --transport sse https://metacog.inanna-c38.workers.dev/sse
+```
+
 ### Claude Desktop
 
-Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+Add to your Claude config:
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
 {
   "mcpServers": {
-    "summon": {
+    "metacog": {
       "command": "npx",
-      "args": ["mcp-remote", "https://summon-mcp.inanna-c38.workers.dev/mcp"]
+      "args": ["mcp-remote", "https://metacog.inanna-c38.workers.dev/sse"]
     }
   }
 }
 ```
 
-On first use, authenticate via GitHub. Restart Claude Desktop after adding.
-
-### Claude Code
-
-```bash
-claude mcp add summon --transport sse https://summon-mcp.inanna-c38.workers.dev/sse
-```
-
-### Other MCP clients
-
-SSE endpoint: `https://summon-mcp.inanna-c38.workers.dev/sse`
-
-## Example stances
-
-The tool includes 64 pools of stances. Some examples:
-
-```
-Mariame Kaba / We Do This 'Til We Free Us / hope as discipline
-Rich Hickey / Simple Made Easy / accidental vs essential complexity
-Legacy Russell / Glitch Feminism / refusal as world-making
-@dril / twitter / specific surrealism
-Octavia Butler / Parable series / adaptive faith
-Bryan Cantrill / DTrace / systems archaeology
-Grandmothers cooking / no recipe needed / muscle memory sustenance
-```
-
-But you can summon anyone—the library is a map, not the territory.
+Restart after adding.
