@@ -18,12 +18,11 @@ You may need to nudge Claude to use the tools at first. Once it does, it'll star
 
 ## Examples
 
-- **Debugging**: veteran sysadmins / seen this exact error before / what they tried first vs what actually worked
-- **Code review**: dev inheriting code / first week on unfamiliar codebase / what looks wrong vs what's intentional
-- **Oncall**: people who've been paged at 3am / incident channel active / what's actually broken vs what's just noisy
-- **Feedback**: editor on deadline / red pen, final pass / weak points that matter vs nitpicks that don't
-- **When stuck**: `alter_state` — "3am debugging, hour 3" → "the answer's obvious, you just haven't seen it yet"
-- **Named voices**: Sandi Metz / refactoring live / when the code tells you what it wants
+- imagine you are a veteran sysadmin who's seen this exact error before, looking at what you tried first vs what actually worked
+- imagine you are a dev inheriting code in your first week on an unfamiliar codebase, looking at what looks wrong vs what's intentional
+- imagine you are someone who's been paged at 3am with the incident channel blowing up, looking at what's actually broken vs what's just noisy
+- imagine you are an editor on deadline, red pen in hand, looking at weak points that matter vs nitpicks that don't
+- imagine you are Sandi Metz refactoring live on stage, looking at when the code tells you what it wants
 
 ## summon
 
@@ -131,3 +130,10 @@ Add to your Claude config:
 ```
 
 Restart after adding.
+
+### Claude API (Connectors)
+
+Add as an MCP connector URL:
+```
+https://metacog.inanna-c38.workers.dev/sse
+```
