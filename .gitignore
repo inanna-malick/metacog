@@ -5,3 +5,4 @@ dist
 wrangler.toml
 .mcp.json
 .claude/
+config.bat
