@@ -1,4 +1,4 @@
-# metacog
+<img width="360" height="90" alt="image" src="https://github.com/user-attachments/assets/744f0854-7f06-4a89-8d07-26c5873dbf2c" />
 
 LLMs don't have stable identity. This is a feature.
 
