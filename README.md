@@ -20,9 +20,9 @@ The server exposes three primary tools:
 - **`lens`**: The active cognitive filter or obsession (e.g., "To see code as poetry").
 - **`setting`**: The environmental constraints (e.g., "A burning library").
 
-### 2. `alter_state` (Cognitive Tuning)
-**Purpose:** Modulates the "texture" of thought, simulating drugs, flow states, or hardware conditions.
-- **`catalyst`**: The trigger (e.g., "200mg Modafinil", "Cosmic Horror").
+### 2. `drugs` (Cognitive Tuning)
+**Purpose:** Modulates the "texture" of thought, simulating chemicals, flow states, or hardware conditions.
+- **`catalyst`**: The trigger (e.g., "Psilocybin", "Caffeine", "Sleep Deprivation").
 - **`profile`**: The effect profile (e.g., "High Focus + Low Empathy").
 - **`texture`**: The subjective qualia of the state.
 
@@ -69,7 +69,7 @@ npm run deploy
 **System:** "You are The Auditor..."
 
 **Model (Internal Monologue):** *I need to see the hidden patterns.*
-**Model Call:** `alter_state({ catalyst: "debugger_injection", profile: "X-Ray Vision", texture: "Code is transparent" })`
+**Model Call:** `drugs({ catalyst: "debugger_injection", profile: "X-Ray Vision", texture: "Code is transparent" })`
 
 **Model:** "I have scanned the binary. There is a leak in line 42..."
 

@@ -20,9 +20,9 @@ Two tools, both ritual by design—they return template strings, no semantic pro
 - Returns: `You are ${who} at ${where} using the lens of ${lens}`
 - Test: Can you predict what this voice would never say?
 
-**alter_state(anchor, result)**
+**drugs(catalyst, profile, texture)**
 - Description: "Shift how you process, not where you stand."
-- Returns: `[${anchor}]\nEntering state\nT+now: ${result}`
+- Returns: `[SUBSTRATE MODIFICATION DETECTED]\nCatalyst: ${catalyst}\nProfile: ${profile}\nTexture: ${texture}\nState integration complete.`
 
 ## Design decisions (for future-you)
 
