@@ -7,7 +7,11 @@
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "cf-typegen": "wrangler types",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build:local": "node esbuild.config.mjs",
+    "start:local": "node dist/stdio.mjs",
+    "docker:build": "docker build -t metacog-mcp .",
+    "docker:run": "docker run -i --rm metacog-mcp"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
@@ -17,6 +21,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250926.0",
+    "esbuild": "^0.25.0",
     "prettier": "^3.6.2",
     "typescript": "5.9.2",
     "wrangler": "^4.40.1"
