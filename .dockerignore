@@ -1,0 +1,7 @@
+node_modules
+.wrangler
+.git
+dist
+.claude
+.env*
+*.log
